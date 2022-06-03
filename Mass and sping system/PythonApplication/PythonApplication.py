@@ -9,23 +9,14 @@ f=ti.Vector.field(2,dtype=ti.f32,shape=max_num)
 fix=ti.field(dtype=ti.i32,shape=max_num)
 y=ti.field(dtype=ti.f32,shape=())
 num=ti.field(dtype=ti.i32,shape=())
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 28a7e71ad2bfc4cf8462d95f8e74ba6e9236248d
 damp=ti.field(dtype=ti.f32,shape=())
 len=ti.field(dtype=ti.f32,shape=(max_num,max_num))
 y[None]=300
 damp[None]=1
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 28a7e71ad2bfc4cf8462d95f8e74ba6e9236248d
 friction=ti.field(dtype=ti.f32,shape=())
 len=ti.field(dtype=ti.f32,shape=(max_num,max_num))
 y[None]=300
 friction[None]=1
->>>>>>> 8afbd3d60e78d30a8dd4f514651e0b979b92a025
 
 @ti.kernel
 def update():
@@ -39,15 +30,9 @@ def update():
     for i in range(n):
         if fix[i]==0:
             v[i]+=dt*f[i]
-<<<<<<< HEAD
             v[i]*=ti.exp(-dt*damp[None])
-=======
-<<<<<<< HEAD
             v[i]*=ti.exp(-dt*damp[None])
-=======
->>>>>>> 28a7e71ad2bfc4cf8462d95f8e74ba6e9236248d
             v[i]*=ti.exp(-dt*friction[None])
->>>>>>> 8afbd3d60e78d30a8dd4f514651e0b979b92a025
             x[i]+=dt*v[i]
     for i in range(n):
         for j in range(n):
@@ -86,21 +71,15 @@ while gui.running:
         if e.key=='s':
             y[None]/=1.1
         if e.key=='d':
-<<<<<<< HEAD
             damp[None]*=1.5
         if e.key=='a':
             damp[None]/=1.5
-=======
-<<<<<<< HEAD
             damp[None]*=1.5
         if e.key=='a':
             damp[None]/=1.5
-=======
->>>>>>> 28a7e71ad2bfc4cf8462d95f8e74ba6e9236248d
             friction[None]*=1.5
         if e.key=='a':
             friction[None]/=1.5
->>>>>>> 8afbd3d60e78d30a8dd4f514651e0b979b92a025
         if e.key==ti.GUI.LMB:
             add(e.pos[0],e.pos[1],gui.is_pressed(ti.GUI.SHIFT))
         if e.key == ti.GUI.ESCAPE:
