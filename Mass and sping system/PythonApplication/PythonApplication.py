@@ -10,11 +10,17 @@ fix=ti.field(dtype=ti.i32,shape=max_num)
 y=ti.field(dtype=ti.f32,shape=())
 num=ti.field(dtype=ti.i32,shape=())
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 28a7e71ad2bfc4cf8462d95f8e74ba6e9236248d
 damp=ti.field(dtype=ti.f32,shape=())
 len=ti.field(dtype=ti.f32,shape=(max_num,max_num))
 y[None]=300
 damp[None]=1
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 28a7e71ad2bfc4cf8462d95f8e74ba6e9236248d
 friction=ti.field(dtype=ti.f32,shape=())
 len=ti.field(dtype=ti.f32,shape=(max_num,max_num))
 y[None]=300
@@ -36,26 +42,21 @@ def update():
 <<<<<<< HEAD
             v[i]*=ti.exp(-dt*damp[None])
 =======
+<<<<<<< HEAD
+            v[i]*=ti.exp(-dt*damp[None])
+=======
+>>>>>>> 28a7e71ad2bfc4cf8462d95f8e74ba6e9236248d
             v[i]*=ti.exp(-dt*friction[None])
 >>>>>>> 8afbd3d60e78d30a8dd4f514651e0b979b92a025
             x[i]+=dt*v[i]
     for i in range(n):
         for j in range(n):
             if i!=j and (x[i]-x[j]).norm()<0.01:
-                if fix[i]|fix[j]==0:
                     v[i]+=v[j]
                     v[j]=v[i]-v[j]
                     v[i]-=v[j]
                     v[i]=v[i].norm()*(x[i]-x[j]).normalized()
                     v[j]=v[j].norm()*(x[j]-x[i]).normalized()
-                else:
-                    while (x[i]-x[j]).norm()<0.01:
-                        if fix[i]==0:
-                            x[i]-=0.001*v[i].normalized()
-                        else:
-                            x[j]-=0.001*v[j].normalized()
-                    v[i]=-v[i]
-                    v[j]=-v[j]
     for i in range(n):
         for j in ti.static(range(2)):
             if x[i][j]<0:
@@ -90,6 +91,12 @@ while gui.running:
         if e.key=='a':
             damp[None]/=1.5
 =======
+<<<<<<< HEAD
+            damp[None]*=1.5
+        if e.key=='a':
+            damp[None]/=1.5
+=======
+>>>>>>> 28a7e71ad2bfc4cf8462d95f8e74ba6e9236248d
             friction[None]*=1.5
         if e.key=='a':
             friction[None]/=1.5
