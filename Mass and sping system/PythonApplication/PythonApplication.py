@@ -36,12 +36,17 @@ def update():
             x[i]+=dt*v[i]
     for i in range(n):
         for j in range(n):
-            if i!=j and (x[i]-x[j]).norm()<0.01:
-                    v[i]+=v[j]
-                    v[j]=v[i]-v[j]
-                    v[i]-=v[j]
-                    v[i]=v[i].norm()*(x[i]-x[j]).normalized()
-                    v[j]=v[j].norm()*(x[j]-x[i]).normalized()
+            if i!=j and (x[i]-x[j]).norm()<0.01 and not fix[i]&fix[j]:
+                v[i]+=v[j]
+                v[j]=v[i]-v[j]
+                v[i]-=v[j]
+                v[i]=v[i].norm()*(x[i]-x[j]).normalized()
+                v[j]=v[j].norm()*(x[j]-x[i]).normalized()
+                if fix[i]:
+                    v[i]=ti.Vector([0,0])
+                if fix[j]:
+                    v[j]=ti.Vector([0,0])
+
     for i in range(n):
         for j in ti.static(range(2)):
             if x[i][j]<0:
